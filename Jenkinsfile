@@ -23,10 +23,12 @@ pipeline {
     stages {
         
         stage ('Check env variables') {
-            sh """
-            echo -var ${REGION}
-            echo -var ${BUCKET_NAME}
-            """
+            steps {
+                sh """
+                echo -var ${REGION}
+                echo -var ${BUCKET_NAME}
+                """
+            }
         }
 
         stage ('Initialize terraform') {
