@@ -27,6 +27,7 @@ pipeline {
                 sh """
                 echo -var ${REGION}
                 echo -var ${BUCKET_NAME}
+                aws sts get-caller-identity
                 """
             }
         }
