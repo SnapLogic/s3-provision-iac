@@ -54,7 +54,8 @@ pipeline {
             }
             steps {
                 sh """
-                terraform apply 'tfplan'
+                terraform apply tfplan
+                rm -rf .terraform/
                 """
             }
         }
