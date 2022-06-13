@@ -40,21 +40,21 @@ pipeline {
             }
         }
 
-        // stage ('Plan terraform') {
-        //     steps {
-        //         sh """
-        //         terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" -out tfplan
-        //         """
-        //     }
-        // }
+        stage ('Plan terraform') {
+            steps {
+                sh """
+                terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" -out tfplan
+                """
+            }
+        }
 
         stage ('Launch S3') {
             when {
-                expression {params.OPERATION = 'build'}
+                expression {params.OPERATION == 'build'}
             }
             steps {
                 sh """
-                terraform apply -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" 
+                terraform apply tfplan
                 rm -rf .terraform/
                 """
             }
@@ -62,7 +62,7 @@ pipeline {
 
         stage ('Destroy S3') {
             when {
-                expression {params.OPERATION = 'destroy'}
+                expression {params.OPERATION == 'destroy'}
             }
             steps {
                 sh """
