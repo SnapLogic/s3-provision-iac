@@ -40,13 +40,13 @@ pipeline {
             }
         }
 
-        stage ('Plan terraform') {
-            steps {
-                sh """
-                terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" -out tfplan
-                """
-            }
-        }
+        // stage ('Plan terraform') {
+        //     steps {
+        //         sh """
+        //         terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" -out tfplan
+        //         """
+        //     }
+        // }
 
         stage ('Launch S3') {
             when {
@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 sh """
-                terraform apply tfplan
+                terraform apply -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" 
                 rm -rf .terraform/
                 """
             }
