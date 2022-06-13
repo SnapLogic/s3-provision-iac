@@ -37,13 +37,13 @@ data "aws_iam_policy_document" "bucket_policy" {
     ]
 
     resources = [
-      "arn:aws:s3:::${local.bucket_name}",
+      "arn:aws:s3:::$local.bucket_name",
     ]
   }
 }
 
 module "s3_bucket" {
     source = "terraform-aws-modules/s3-bucket/aws"        
-    bucket = "${local.bucket_name}"
+    bucket = "$local.bucket_name"
     force_destroy = true
 }
