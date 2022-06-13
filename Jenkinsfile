@@ -30,11 +30,15 @@ pipeline {
         }
 
         stage ('Initialize terraform') {
-            terraform init -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+            steps {
+                terraform init -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+            }
         }
 
         stage ('Plan terraform') {
-            terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+            steps {
+                terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+            }
         }
 
         stage ('Launch S3') {
