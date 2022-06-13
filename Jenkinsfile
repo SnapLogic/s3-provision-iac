@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sh """
                 tfswitch --latest
-                terraform init -auto-approve  -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+                terraform init -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 """
             }
         }
@@ -43,7 +43,7 @@ pipeline {
         stage ('Plan terraform') {
             steps {
                 sh """
-                terraform plan -auto-approve  -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" -out tfplan
+                terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" -out tfplan
                 """
             }
         }
