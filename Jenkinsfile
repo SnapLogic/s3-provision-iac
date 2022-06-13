@@ -34,7 +34,7 @@ pipeline {
         stage ('Initialize terraform') {
             steps {
                 sh """
-                tfswitch
+                tfswitch --latest
                 terraform init -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 """
             }
@@ -43,7 +43,6 @@ pipeline {
         stage ('Plan terraform') {
             steps {
                 sh """
-                tfswitch
                 terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 """
             }
@@ -55,7 +54,6 @@ pipeline {
             }
             steps {
                 sh """
-                tfswitch
                 terraform apply -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 """
             }
@@ -67,7 +65,6 @@ pipeline {
             }
             steps {
                 sh """
-                tfswitch
                 terraform destroy -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 rm -rf .terraform/
                 """
