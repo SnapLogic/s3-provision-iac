@@ -31,13 +31,17 @@ pipeline {
 
         stage ('Initialize terraform') {
             steps {
+                sh """
                 terraform init -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+                """
             }
         }
 
         stage ('Plan terraform') {
             steps {
+                sh """
                 terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+                """
             }
         }
 
@@ -46,7 +50,9 @@ pipeline {
                 expression {params.OPERATION = 'build'}
             }
             steps {
+                sh """
                 terraform apply -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+                """
             }
         }
 
@@ -55,8 +61,10 @@ pipeline {
                 expression {params.OPERATION = 'destroy'}
             }
             steps {
+                sh """
                 terraform destroy -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 rm -rf .terraform/
+                """
             }
         }
     }
