@@ -43,7 +43,7 @@ pipeline {
         stage ('Plan terraform') {
             steps {
                 sh """
-                terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+                terraform plan -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}" -out tfplan
                 """
             }
         }
@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 sh """
-                terraform apply -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+                terraform apply tfplan -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 """
             }
         }
