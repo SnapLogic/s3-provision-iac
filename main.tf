@@ -42,8 +42,9 @@ locals {
 #   }
 # }
 
-module "s3_bucket" {
-    source = "terraform-aws-modules/s3-bucket/aws"        
+resource "s3_bucket" "test_bucket" {
     bucket = local.bucket_name
-    force_destroy = true
+    versioning {
+      enabled = true
+    }
 }
