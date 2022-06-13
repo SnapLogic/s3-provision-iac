@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "bucket_policy" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = [aws_iam_role.this.arn]
+      identifiers = [aws_iam_role.this.assume_role_policy]
     }
 
     actions = [
