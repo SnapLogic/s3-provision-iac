@@ -42,7 +42,7 @@ locals {
 #   }
 # }
 
-resource "s3_bucket" "test_bucket" {
+resource "aws_s3_bucket" "test_bucket" {
     bucket = local.bucket_name
     versioning {
       enabled = true
