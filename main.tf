@@ -44,6 +44,6 @@ data "aws_iam_policy_document" "bucket_policy" {
 
 module "s3_bucket" {
     source = "terraform-aws-modules/s3-bucket/aws"        
-    bucket = "${local.bucket_name}"
+    bucket = local.bucket_name
     force_destroy = true
 }
