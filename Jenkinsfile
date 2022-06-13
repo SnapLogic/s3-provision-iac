@@ -34,7 +34,6 @@ pipeline {
         stage ('Initialize terraform') {
             steps {
                 sh """
-                tfswitch --latest
                 terraform init -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
                 """
             }
