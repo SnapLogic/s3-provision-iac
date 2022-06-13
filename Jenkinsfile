@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 sh """
-                terraform apply "tfplan" -auto-approve -var "bucket_name=${BUCKET_NAME}" -var "region=${REGION}"
+                terraform apply "tfplan" 
                 """
             }
         }
