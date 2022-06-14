@@ -3,21 +3,20 @@ def operations = ["build", "destroy"]
 
 pipeline {
 
-    agent {
-        docker {
-        alwaysPull true
-        image '694702677705.dkr.ecr.us-west-2.amazonaws.com/cloudops:cloudops-jenkins-base'
-        args '-u root:root'
-        registryUrl 'https://694702677705.dkr.ecr.us-west-2.amazonaws.com'
-        registryCredentialsId 'ecr:us-west-2:aws-instance-role'
-        }
-    }
+    // agent {
+    //     docker {
+    //     alwaysPull true
+    //     image '694702677705.dkr.ecr.us-west-2.amazonaws.com/cloudops:cloudops-jenkins-base'
+    //     args '-u root:root'
+    //     registryUrl 'https://694702677705.dkr.ecr.us-west-2.amazonaws.com'
+    //     registryCredentialsId 'ecr:us-west-2:aws-instance-role'
+    //     }
+    // }
 
     parameters {
         choice(name: 'REGION', choices: regions, description: 'Choose a region to deploy the S3.')
         string(name: 'BUCKET_NAME', description: 'Choose a name for the s3 bucket')
         choice(name: 'OPERATION', choices: operations, description: 'Build or destroy S3')
-
     }
 
     stages {
