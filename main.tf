@@ -8,7 +8,7 @@ locals {
 }
 
 /* provision the bucket */
-resource "aws_s3_bucket" "test_bucket" {
+resource "aws_s3_bucket" "test1" {
     bucket = "${local.bucket_name}"
 }
 

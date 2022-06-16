@@ -4,6 +4,6 @@ variable region {
 }
 
 variable bucket_name {
-    default = "test_bucket_analytics"
+    default = "test-bucket-analytics"
     description = "Name of S3 data lake resource."
 }
