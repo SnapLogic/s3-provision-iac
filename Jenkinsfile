@@ -3,15 +3,17 @@ def operations = ["refresh", "build", "destroy"]
 
 pipeline {
 
-    agent {
-        docker {
-        alwaysPull true
-        image '694702677705.dkr.ecr.us-west-2.amazonaws.com/cloudops:cloudops-jenkins-base'
-        args '-u root:root'
-        registryUrl 'https://694702677705.dkr.ecr.us-west-2.amazonaws.com'
-        registryCredentialsId 'ecr:us-west-2:aws-instance-role'
-        }
-    }
+    // agent {
+    //     docker {
+    //     alwaysPull true
+    //     image '694702677705.dkr.ecr.us-west-2.amazonaws.com/cloudops:cloudops-jenkins-base'
+    //     args '-u root:root'
+    //     registryUrl 'https://694702677705.dkr.ecr.us-west-2.amazonaws.com'
+    //     registryCredentialsId 'ecr:us-west-2:aws-instance-role'
+    //     }
+    // }
+
+    agent {docker { image 'node:16.13.1-alpine' }}
 
 
     parameters {
